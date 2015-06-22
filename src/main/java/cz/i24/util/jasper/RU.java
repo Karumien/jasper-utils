@@ -532,7 +532,7 @@ public final class RU {
         return "<font color=\"" + color + "\">" + original + "</font>";
     }
 
-    private static String tag(String name, String original) {
+    public static String tag(String name, String original) {
         if (original == null) {
             return "";
         }
@@ -700,6 +700,14 @@ public final class RU {
             baseFontName = BASE_FONT;
         }
         return style(baseFontName + "i", original, size, trueType);
+    }
+
+    public static String sup(String original) {
+        return tag("sup", original);
+    }
+
+    public static String sub(String original) {
+        return tag("sub", original);
     }
 
     public static String i(String baseFontName, String original) {
