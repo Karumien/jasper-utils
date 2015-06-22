@@ -9,7 +9,7 @@
 
 	<groupId>cz.i24.util</groupId>
 	<artifactId>jasper-utils</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 
 	<name>i24: Utils - Jasper Reports Utils</name>
 	<description>Jasper Reports/iReport Utils for projects i24</description>
@@ -48,9 +48,9 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:svn:https://github.com/karumien/jasper-utils/tags/jasper-utils-1.0.0</connection>
-		<developerConnection>scm:svn:https://github.com/karumien/jasper-utils/tags/jasper-utils-1.0.0</developerConnection>
-		<url>https://github.com/karumien/jasper-utils/tags/jasper-utils-1.0.0</url>
+		<connection>scm:svn:https://github.com/karumien/jasper-utils/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/karumien/jasper-utils/trunk</developerConnection>
+		<url>https://github.com/karumien/jasper-utils/trunk</url>
 	</scm>
 
 </project>
