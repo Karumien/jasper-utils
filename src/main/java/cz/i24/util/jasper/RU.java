@@ -893,7 +893,7 @@ public final class RU {
      * Method addZerosBefore.
      *
      * @param orderNo
-     * @param i
+     * @param count
      * @return String
      */
     public static String addZerosBefore(String orderNo, int count) {

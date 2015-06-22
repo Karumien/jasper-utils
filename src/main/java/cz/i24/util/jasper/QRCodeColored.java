@@ -104,15 +104,6 @@ public class QRCodeColored {
         return this;
     }
 
-    /**
-     * Overrides the size of the qr from its default 125x125
-     *
-     * @param width
-     *            the width in pixels
-     * @param height
-     *            the height in pixels
-     * @return the current QRCode object
-     */
     public QRCodeColored withColor(int onColor, int offColor) {
         this.onColor = onColor;
         this.offColor = offColor;
