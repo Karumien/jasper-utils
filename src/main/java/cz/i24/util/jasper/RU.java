@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -20,6 +21,7 @@ import java.util.Locale;
 
 import net.sf.jasperreports.engine.util.FileResolver;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 /**
@@ -134,6 +136,48 @@ public final class RU {
         return df.format(value);
     }
 
+
+    public static Object json(Object data, String hierarchy) {
+
+        if (!(data instanceof JsonNode) || isBlank(hierarchy)) {
+            return null;
+        }
+
+        try {
+
+            String[] parts = hierarchy.split("[.]");
+            JsonNode actual = (JsonNode) data;
+
+            for (String part : parts) {
+                actual = actual.get(part);
+                if (actual == null) {
+                    break;
+                }
+            }
+
+            if (actual != null) {
+
+                if (actual.isArray()) {
+
+                    List<JsonNode> dataList = new ArrayList<JsonNode>();
+
+                    for (final JsonNode objNode : actual) {
+                        dataList.add(objNode);
+                    }
+
+                    return dataList;
+                }
+
+                return actual.asText();
+            }
+
+        } catch (Exception e) {
+            return hierarchy;
+        }
+
+        return null;
+    }
+
     /* NUMBER FORMAT ALIASES */
 
     public static String formatNumber(Number value) {
@@ -222,6 +266,13 @@ public final class RU {
         return formatDate(date);
     }
 
+    public static String when(Boolean printWhen, Object value) {
+        return RU.nn(printWhen(printWhen, value));
+    }
+
+    public static Object printWhen(Boolean printWhen, Object value) {
+        return Boolean.TRUE.equals(printWhen) ? value : null;
+    }
 
     /*
      * return string with first upper case
@@ -542,18 +593,18 @@ public final class RU {
 
     /*
      * public static String format(Object obj, int decimal) {
-     *
+     * 
      * if (obj instanceof Number) {
      * String a = "";
      * if (decimal>0)
      * a = ".";
-     *
+     * 
      * for (int i=0; i<decimal; i++)
      * a+="0";
-     *
+     * 
      * return format(obj, "#,##0"+a);
      * }
-     *
+     * 
      * return format(obj);
      * }
      */

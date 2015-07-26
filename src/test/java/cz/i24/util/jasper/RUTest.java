@@ -27,4 +27,11 @@ public class RUTest {
 
     }
 
+    @Test
+    public void testSplit() {
+
+        String split[] = "sub1.sn.2".split("[.]");
+        System.out.println(split.length + ", " + split[0]);
+
+    }
 }
