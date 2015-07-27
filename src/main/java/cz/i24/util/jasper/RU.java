@@ -266,27 +266,27 @@ public final class RU {
         return formatDate(date);
     }
 
-    public static String w(Boolean printWhen, Object value) {
+    public static String w(Object printWhen, Object value) {
         return RU.when(printWhen, value);
     }
 
-    public static String wn(Boolean printWhen, Object value) {
+    public static String wn(Object printWhen, Object value) {
         return RU.whenNot(printWhen, value);
     }
 
-    public static String when(Boolean printWhen, Object value) {
+    public static String when(Object printWhen, Object value) {
         return RU.nn(printWhen(printWhen, value));
     }
 
-    public static String whenNot(Boolean printWhen, Object value) {
+    public static String whenNot(Object printWhen, Object value) {
         return RU.nn(printWhenNot(printWhen, value));
     }
 
-    public static Object printWhen(Boolean printWhen, Object value) {
+    public static Object printWhen(Object printWhen, Object value) {
         return Boolean.TRUE.equals(printWhen) ? value : null;
     }
 
-    public static Object printWhenNot(Boolean printWhen, Object value) {
+    public static Object printWhenNot(Object printWhen, Object value) {
         return Boolean.TRUE.equals(printWhen) ? null : value;
     }
 
