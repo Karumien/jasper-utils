@@ -283,11 +283,17 @@ public final class RU {
     }
 
     public static Object printWhen(Object printWhen, Object value) {
-        return Boolean.TRUE.equals(printWhen) ? value : null;
+        if (asBool(printWhen) == null) {
+            return null;
+        }
+        return Boolean.TRUE.equals(asBool(printWhen)) ? value : null;
     }
 
     public static Object printWhenNot(Object printWhen, Object value) {
-        return Boolean.TRUE.equals(printWhen) ? null : value;
+        if (asBool(printWhen) == null) {
+            return null;
+        }
+        return Boolean.TRUE.equals(asBool(printWhen)) ? null : value;
     }
 
     /*
@@ -1003,6 +1009,19 @@ public final class RU {
 
     public static String bool(Object value, String trueValue, String falseValue) {
 
+        Boolean valueBool = asBool(value);
+
+        if (valueBool == null) {
+            return null;
+        }
+
+        return Boolean.TRUE.equals(asBool(value)) ? trueValue : falseValue;
+
+    }
+
+
+    public static Boolean asBool(Object value) {
+
         if (value == null || value.toString().isEmpty()) {
             return null;
         }
@@ -1017,9 +1036,7 @@ public final class RU {
             return null;
         }
 
-        return Boolean.TRUE.equals(valueBool) ? trueValue : falseValue;
-
+        return valueBool;
     }
-
 
 }
