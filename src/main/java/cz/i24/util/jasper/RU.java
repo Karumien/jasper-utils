@@ -990,6 +990,34 @@ public final class RU {
         return orderNo;
     }
 
+    public static String ts(String separator, Object... data) {
+        return tokens(separator, data);
+    }
+
+    public static String tokens(String separator, Object... data) {
+
+        if (data == null || data.length == 0 || separator == null) {
+            return null;
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        
+        boolean separate = false;
+        
+        for (Object token : data) {
+            
+            if (separate) {
+                sb.append(separator);
+            } else {
+                separate = true;
+            }
+
+            sb.append(nn(token));
+        }
+        
+        return sb.toString();
+
+    }
 
     public static Object getResource(FileResolver fileResolver, String filename) {
 
@@ -1018,6 +1046,7 @@ public final class RU {
         return Boolean.TRUE.equals(asBool(value)) ? trueValue : falseValue;
 
     }
+
 
 
     public static Boolean asBool(Object value) {
