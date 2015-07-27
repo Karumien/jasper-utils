@@ -1006,6 +1006,10 @@ public final class RU {
         
         for (Object token : data) {
             
+            if (nn(token).trim().length() == 0) {
+                continue;
+            }
+
             if (separate) {
                 sb.append(separator);
             } else {
