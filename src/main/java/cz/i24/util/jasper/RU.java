@@ -605,6 +605,10 @@ public final class RU {
         return font(color, original);
     }
 
+    public static String rgb(String color, String original) {
+        return font(color, original);
+    }
+
     public static String font(String color, String original) {
         if (original == null) {
             return "";
