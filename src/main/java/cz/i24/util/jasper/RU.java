@@ -9,9 +9,11 @@ package cz.i24.util.jasper;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -98,6 +100,27 @@ public final class RU {
         return formatDate(date, null);
     }
 
+    public static Date date(Object date) {
+        return date(date, DATE_FORMAT);
+    }
+
+    public static Date date(Object date, String mask) {
+
+        if (mask == null) {
+            mask = DATE_FORMAT;
+        }
+
+        if (date == null || date instanceof Date) {
+            return (Date) date;
+        }
+
+        DateFormat format = new SimpleDateFormat(mask);
+        try {
+            return format.parse(date.toString());
+        } catch (ParseException e) {
+            return null;
+        }
+    }
 
     // --------------------------------------------------------------------------
 
@@ -173,6 +196,18 @@ public final class RU {
                     }
 
                     return dataList;
+                }
+
+                if (actual.isNull()) {
+                    return null;
+                }
+
+                if (actual.isBigDecimal() || actual.isDouble() || actual.isFloat() || actual.isNumber()) {
+                    return actual.decimalValue();
+                }
+
+                if (actual.isBigInteger() || actual.isInt() || actual.isLong()) {
+                    return actual.longValue();
                 }
 
                 return actual.asText();

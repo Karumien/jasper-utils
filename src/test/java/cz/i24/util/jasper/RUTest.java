@@ -6,10 +6,14 @@
  */
 package cz.i24.util.jasper;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -46,6 +50,18 @@ public class RUTest {
         Assert.assertEquals("1 000", RU.fd(new BigDecimal("1000")));
         Assert.assertEquals("-1 000", RU.fd(new BigDecimal("-1000")));
         Assert.assertEquals("-1 000 000", RU.fd(new BigDecimal("-1000000")));
+    }
+
+    @Test
+    public void testJson() throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode data = mapper.readTree("{\"value\": 1000.45 }");
+
+        Object val = RU.json(data, "value");
+
+        Assert.assertNotNull(val);
+
     }
 
 
