@@ -8,6 +8,7 @@ package cz.i24.util.jasper;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -61,6 +62,21 @@ public class RUTest {
         Object val = RU.json(data, "value");
 
         Assert.assertNotNull(val);
+
+    }
+
+
+    @Test
+    public void testDate() throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode data = mapper.readTree("{\"value\": \"14.02.1978\" }");
+
+        Object val = RU.json(data, "value");
+
+        Assert.assertNotNull(val);
+        Date date = RU.date(val);
+        Assert.assertNotNull(date);
 
     }
 
