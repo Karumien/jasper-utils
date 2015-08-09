@@ -45,6 +45,7 @@ public class RUTest {
         Assert.assertEquals("-1 000", RU.f(new BigDecimal("-1000"), "#,##0"));
         Assert.assertEquals("1 000", RU.fd(new BigDecimal("1000")));
         Assert.assertEquals("-1 000", RU.fd(new BigDecimal("-1000")));
+        Assert.assertEquals("-1 000 000", RU.fd(new BigDecimal("-1000000")));
     }
 
 
