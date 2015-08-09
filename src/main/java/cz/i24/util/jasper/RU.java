@@ -202,11 +202,11 @@ public final class RU {
                     return null;
                 }
 
-                if (actual.isBigDecimal() || actual.isDouble() || actual.isFloat() || actual.isNumber()) {
+                if (actual.isBigDecimal() || actual.isDouble() || actual.isFloatingPointNumber() || actual.isNumber()) {
                     return actual.decimalValue();
                 }
 
-                if (actual.isBigInteger() || actual.isInt() || actual.isLong()) {
+                if (actual.isBigInteger() || actual.isInt() || actual.isLong() || actual.isIntegralNumber()) {
                     return actual.longValue();
                 }
 
