@@ -6,6 +6,8 @@
  */
 package cz.i24.util.jasper;
 
+import java.math.BigDecimal;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -34,4 +36,16 @@ public class RUTest {
         System.out.println(split.length + ", " + split[0]);
 
     }
+
+    @Test
+    public void testNumber() {
+        Assert.assertEquals("1 000,00", RU.f(new BigDecimal("1000")));
+        Assert.assertEquals("1 000", RU.f(new BigDecimal("1000"), "#,##0"));
+        Assert.assertEquals("-1 000,00", RU.f(new BigDecimal("-1000")));
+        Assert.assertEquals("-1 000", RU.f(new BigDecimal("-1000"), "#,##0"));
+        Assert.assertEquals("1 000", RU.fd(new BigDecimal("1000")));
+        Assert.assertEquals("-1 000", RU.fd(new BigDecimal("-1000")));
+    }
+
+
 }

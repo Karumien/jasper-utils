@@ -10,6 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public final class RU {
     public static final String DATE_FORMAT = "dd.MM.yyyy";
 
     public static final String NUMBER_FORMAT = "#,##0.00;-#,##0.00";
+
+    public static final String DECIMAL_FORMAT = "#,##0;-#,##0";
 
     public static final String DIVIDED_BY_ZERO_VALUE = "--";
 
@@ -132,6 +135,10 @@ public final class RU {
         }
 
         DecimalFormat df = (DecimalFormat) NumberFormat.getInstance(defaultLocale);
+        DecimalFormatSymbols symbols = df.getDecimalFormatSymbols();
+        symbols.setGroupingSeparator(' ');
+        df.setDecimalFormatSymbols(symbols);
+
         df.applyPattern(mask);
         return df.format(value);
     }
@@ -239,6 +246,10 @@ public final class RU {
 
     public static String f(Object obj) {
         return format(obj);
+    }
+
+    public static String fd(Object obj) {
+        return format(obj, DECIMAL_FORMAT);
     }
 
     public static String f(Object obj, String mask) {
