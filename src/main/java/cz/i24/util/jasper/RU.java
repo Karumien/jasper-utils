@@ -468,40 +468,44 @@ public final class RU {
         return o.toString().length() == 0;
     }
 
+    public static String black(Object o) {
+        return font("black", nn(o));
+    }
+
     public static String red(Object o) {
-        return font("red", blank(o));
+        return font("red", nn(o));
     }
 
     public static String blue(Object o) {
-        return font("blue", blank(o));
+        return font("blue", nn(o));
     }
 
     public static String green(Object o) {
-        return font("green", blank(o));
+        return font("green", nn(o));
     }
 
     public static String yellow(Object o) {
-        return font("yellow", blank(o));
+        return font("yellow", nn(o));
     }
 
     public static String pink(Object o) {
-        return font("pink", blank(o));
+        return font("pink", nn(o));
     }
 
     public static String cyan(Object o) {
-        return font("cyan", blank(o));
+        return font("cyan", nn(o));
     }
 
     public static String white(Object o) {
-        return font("white", blank(o));
+        return font("white", nn(o));
     }
 
     public static String orange(Object o) {
-        return font("orange", blank(o));
+        return font("orange", nn(o));
     }
 
     public static String silver(Object o) {
-        return font("silver", blank(o));
+        return font("silver", nn(o));
     }
 
     /**
@@ -511,7 +515,7 @@ public final class RU {
      * @return
      */
     public static String nc(Object o) {
-        return font("#D16B1B", blank(o));
+        return font("#D16B1B", nn(o));
     }
 
     public static String li() {
@@ -519,15 +523,15 @@ public final class RU {
     }
 
     public static String i(Object o) {
-        return tag("i", blank(o));
+        return tag("i", nn(o));
     }
 
     public static String b(Object o) {
-        return tag("b", blank(o));
+        return tag("b", nn(o));
     }
 
     public static String u(Object o) {
-        return tag("u", blank(o));
+        return tag("u", nn(o));
     }
 
     public static String s(Object original, Boolean striked) {
@@ -545,15 +549,15 @@ public final class RU {
         }
 
         return "<style" + (Boolean.TRUE.equals(striked) ? " isStrikeThrough=\"true\"" : "") + ">" + space
-                + blank(original) + space + "</style>";
+                + nn(original) + space + "</style>";
     }
 
     public static String u(Object o, Boolean striked) {
-        return Boolean.TRUE.equals(striked) ? u(o) : blank(o);
+        return Boolean.TRUE.equals(striked) ? u(o) : nn(o);
     }
 
     public static String bi(Object o) {
-        return tag("i", tag("b", blank(o)));
+        return tag("i", tag("b", nn(o)));
     }
 
     /**
@@ -597,6 +601,9 @@ public final class RU {
         return bi(o);
     }
 
+    public static String color(String color, String original) {
+        return font(color, original);
+    }
 
     public static String font(String color, String original) {
         if (original == null) {
