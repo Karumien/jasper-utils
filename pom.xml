@@ -9,7 +9,7 @@
 
 	<groupId>cz.i24.util</groupId>
 	<artifactId>jasper-utils</artifactId>
-	<version>1.0.5-SNAPSHOT</version>
+	<version>1.0.4-SNAPSHOT</version>
 
 	<name>i24: Utils - Jasper Reports Utils</name>
 	<description>Jasper Reports/iReport Utils for projects i24</description>
