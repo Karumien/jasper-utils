@@ -80,5 +80,16 @@ public class RUTest {
 
     }
 
+    @Test
+    public void testLogical() {
+        Assert.assertEquals(true, RU.isTrue("true"));
+        Assert.assertEquals(false, RU.isFalse("false"));
+        Assert.assertEquals(true, RU.isTrue(Boolean.TRUE));
+        Assert.assertEquals(false, RU.isFalse(Boolean.FALSE));
+
+        Assert.assertEquals(false, RU.isTrue(null));
+        Assert.assertEquals(true, RU.isTrue(null, true));
+        Assert.assertEquals(false, RU.isFalse(null, false));
+    }
 
 }

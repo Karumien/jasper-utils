@@ -1056,13 +1056,13 @@ public final class RU {
         if (data == null || data.length == 0 || separator == null) {
             return null;
         }
-        
+
         StringBuilder sb = new StringBuilder();
-        
+
         boolean separate = false;
-        
+
         for (Object token : data) {
-            
+
             if (nn(token).trim().length() == 0) {
                 continue;
             }
@@ -1075,7 +1075,7 @@ public final class RU {
 
             sb.append(nn(token));
         }
-        
+
         return sb.toString();
 
     }
@@ -1109,7 +1109,6 @@ public final class RU {
     }
 
 
-
     public static Boolean asBool(Object value) {
 
         if (value == null || value.toString().isEmpty()) {
@@ -1118,15 +1117,55 @@ public final class RU {
 
         Boolean valueBool = null;
 
-        if (value instanceof String || value instanceof Boolean) {
+        if (value instanceof String) {
             valueBool = Boolean.valueOf(value.toString());
-        }
-
-        if (valueBool == null) {
+        } else if (value instanceof Boolean) {
+            valueBool = (Boolean) value;
+        } else {
             return null;
         }
 
         return valueBool;
+    }
+
+    public static boolean isTrue(Object value) {
+        return isTrue(value, false);
+    }
+
+    public static boolean isTrue(Object value, boolean defaultValue) {
+        Boolean val = asBool(value);
+
+        if (val == null) {
+            return defaultValue;
+        }
+
+        return val;
+    }
+
+    public static boolean isFalse(Object value, boolean defaultValue) {
+        Boolean val = asBool(value);
+
+        if (val == null) {
+            return defaultValue;
+        }
+
+        return !val;
+    }
+
+    public static boolean isFalse(Object value) {
+        return !isFalse(value, true);
+    }
+
+    public static boolean and(Object value, Object value1) {
+        return isTrue(value) && isTrue(value1);
+    }
+
+    public static boolean or(Object value, Object value1) {
+        return isTrue(value) || isTrue(value1);
+    }
+
+    public static boolean not(Object value) {
+        return !isTrue(value);
     }
 
 }
