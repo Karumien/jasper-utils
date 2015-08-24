@@ -1111,14 +1111,6 @@ public final class RU {
         return filename;
     }
 
-    /**
-     * use {@link #w(Object, Object, Object, Object)
-     * 
-     * @param value logical value
-     * @param trueValue value for <code>true</code>
-     * @param falseValue value for <code>false</code>
-     * @return String returned trueValue or falseValue
-     */
     @Deprecated
     public static String bool(Object value, String trueValue, String falseValue) {
         return w(value, trueValue, falseValue, null);
