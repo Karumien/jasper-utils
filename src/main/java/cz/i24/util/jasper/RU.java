@@ -313,33 +313,41 @@ public final class RU {
     }
 
     public static String w(Object printWhen, Object value) {
-        return RU.when(printWhen, value);
+        return w(printWhen, value, "", "");
     }
 
     public static String wn(Object printWhen, Object value) {
-        return RU.whenNot(printWhen, value);
+        return wn(printWhen, value, "", "");
     }
 
-    public static String when(Object printWhen, Object value) {
-        return RU.nn(printWhen(printWhen, value));
+    public static String w(Object printWhen, Object value, Object elseValue) {
+        return w(printWhen, value, elseValue, "");
     }
 
-    public static String whenNot(Object printWhen, Object value) {
-        return RU.nn(printWhenNot(printWhen, value));
+    public static String wn(Object printWhen, Object value, Object elseValue) {
+        return wn(printWhen, value, elseValue, "");
     }
 
-    public static Object printWhen(Object printWhen, Object value) {
+    public static String w(Object printWhen, Object value, Object elseValue, Object nullValue) {
+        return RU.nn(RU.printWhen(printWhen, value, elseValue, nullValue), nullValue);
+    }
+
+    public static String wn(Object printWhen, Object value, Object elseValue, Object nullValue) {
+        return RU.nn(RU.printWhenNot(printWhen, value, elseValue, nullValue), nullValue);
+    }
+
+    public static Object printWhen(Object printWhen, Object value, Object elseValue, Object nullValue) {
         if (asBool(printWhen) == null) {
-            return null;
+            return nullValue;
         }
-        return Boolean.TRUE.equals(asBool(printWhen)) ? value : null;
+        return isTrue(printWhen) ? value : elseValue;
     }
 
-    public static Object printWhenNot(Object printWhen, Object value) {
+    public static Object printWhenNot(Object printWhen, Object value, Object elseValue, Object nullValue) {
         if (asBool(printWhen) == null) {
-            return null;
+            return nullValue;
         }
-        return Boolean.TRUE.equals(asBool(printWhen)) ? null : value;
+        return isFalse(printWhen) ? value : elseValue;
     }
 
     /*
@@ -435,6 +443,13 @@ public final class RU {
         return object.toString();
     }
 
+    public static String trimToNull(Object object) {
+        if (object == null) {
+            return null;
+        }
+
+        return object.toString();
+    }
 
     /**
      * Not null string (blank)
@@ -1096,16 +1111,11 @@ public final class RU {
         return filename;
     }
 
+    /**
+     * @deprecated use {@link #w(Object, Object, Object, Object)     */
+    @Deprecated
     public static String bool(Object value, String trueValue, String falseValue) {
-
-        Boolean valueBool = asBool(value);
-
-        if (valueBool == null) {
-            return null;
-        }
-
-        return Boolean.TRUE.equals(asBool(value)) ? trueValue : falseValue;
-
+        return w(value, trueValue, falseValue, null);
     }
 
 
@@ -1153,7 +1163,7 @@ public final class RU {
     }
 
     public static boolean isFalse(Object value) {
-        return !isFalse(value, true);
+        return isFalse(value, true);
     }
 
     public static boolean and(Object value, Object value1) {

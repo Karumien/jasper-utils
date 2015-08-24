@@ -83,13 +83,49 @@ public class RUTest {
     @Test
     public void testLogical() {
         Assert.assertEquals(true, RU.isTrue("true"));
-        Assert.assertEquals(false, RU.isFalse("false"));
+        Assert.assertEquals(true, RU.isFalse("false"));
+
+        Assert.assertEquals(false, RU.isFalse("true"));
+        Assert.assertEquals(false, RU.isTrue("false"));
+
         Assert.assertEquals(true, RU.isTrue(Boolean.TRUE));
-        Assert.assertEquals(false, RU.isFalse(Boolean.FALSE));
+        Assert.assertEquals(true, RU.isFalse(Boolean.FALSE));
+
+        Assert.assertEquals(false, RU.isFalse(Boolean.TRUE));
+        Assert.assertEquals(false, RU.isTrue(Boolean.FALSE));
 
         Assert.assertEquals(false, RU.isTrue(null));
         Assert.assertEquals(true, RU.isTrue(null, true));
         Assert.assertEquals(false, RU.isFalse(null, false));
+
+
+        Assert.assertEquals("Ano", RU.w(true, "Ano"));
+        Assert.assertEquals("", RU.w(false, "Ano"));
+        Assert.assertEquals("", RU.w(null, "Ano"));
+
+        Assert.assertEquals("", RU.w(false, "Ano", null));
+
+        Assert.assertEquals("Ano", RU.w(true, "Ano", "Ne"));
+        Assert.assertEquals("Ne", RU.w(false, "Ano", "Ne"));
+        Assert.assertEquals("", RU.w(null, "Ano", "Ne"));
+
+        Assert.assertEquals("Ano", RU.w(true, "Ano", "Ne", "----"));
+        Assert.assertEquals("Ne", RU.w(false, "Ano", "Ne", "----"));
+        Assert.assertEquals("----", RU.w(null, "Ano", "Ne", "----"));
+
+        Assert.assertEquals("Ano", RU.wn(false, "Ano"));
+        Assert.assertEquals("", RU.wn(true, "Ano"));
+        Assert.assertEquals("", RU.wn(null, "Ano"));
+
+        Assert.assertEquals("", RU.wn(true, "Ano", null));
+
+        Assert.assertEquals("Ano", RU.wn(false, "Ano", "Ne"));
+        Assert.assertEquals("Ne", RU.wn(true, "Ano", "Ne"));
+        Assert.assertEquals("", RU.wn(null, "Ano", "Ne"));
+
+        Assert.assertEquals("Ano", RU.wn(false, "Ano", "Ne", "----"));
+        Assert.assertEquals("Ne", RU.wn(true, "Ano", "Ne", "----"));
+        Assert.assertEquals("----", RU.wn(null, "Ano", "Ne", "----"));
     }
 
 }
