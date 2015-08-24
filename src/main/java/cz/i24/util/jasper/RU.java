@@ -1112,7 +1112,13 @@ public final class RU {
     }
 
     /**
-     * @deprecated use {@link #w(Object, Object, Object, Object)     */
+     * 
+     * @deprecated use {@link #w(Object, Object, Object, Object)
+     * @param value
+     * @param trueValue
+     * @param falseValue
+     * @return String
+     */
     @Deprecated
     public static String bool(Object value, String trueValue, String falseValue) {
         return w(value, trueValue, falseValue, null);
