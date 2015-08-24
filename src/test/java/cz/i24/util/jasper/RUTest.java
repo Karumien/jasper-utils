@@ -98,6 +98,17 @@ public class RUTest {
         Assert.assertEquals(true, RU.isTrue(null, true));
         Assert.assertEquals(false, RU.isFalse(null, false));
 
+        Assert.assertEquals(true, RU.and(RU.isTrue("true"), RU.isTrue(Boolean.TRUE)));
+        Assert.assertEquals(false, RU.and(RU.isTrue("true"), RU.isTrue(null)));
+        Assert.assertEquals(false, RU.and(null, RU.isTrue(null)));
+
+        Assert.assertEquals(true, RU.or(RU.isTrue("true"), RU.isTrue(Boolean.TRUE)));
+        Assert.assertEquals(true, RU.or(RU.isTrue("true"), RU.isTrue(null)));
+        Assert.assertEquals(false, RU.or(null, RU.isTrue(null)));
+
+        Assert.assertEquals(false, RU.not(RU.isTrue("true")));
+        Assert.assertEquals(true, RU.not(RU.isTrue("false")));
+        Assert.assertEquals(true, RU.not(null));
 
         Assert.assertEquals("Ano", RU.w(true, "Ano"));
         Assert.assertEquals("", RU.w(false, "Ano"));
