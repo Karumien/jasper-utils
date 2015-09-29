@@ -137,6 +137,10 @@ public class RUTest {
         Assert.assertEquals("Ano", RU.wn(false, "Ano", "Ne", "----"));
         Assert.assertEquals("Ne", RU.wn(true, "Ano", "Ne", "----"));
         Assert.assertEquals("----", RU.wn(null, "Ano", "Ne", "----"));
+
+
+        Assert.assertEquals(true, RU.and(RU.isTrue("true"), RU.isTrue(Boolean.TRUE), true));
+        Assert.assertEquals(false, RU.and(RU.isTrue("true"), RU.isTrue(null), false));
     }
 
 }

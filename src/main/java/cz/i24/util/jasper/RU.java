@@ -448,7 +448,7 @@ public final class RU {
             return null;
         }
 
-        return object.toString();
+        return object.toString().trim();
     }
 
     /**
@@ -1164,16 +1164,56 @@ public final class RU {
         return isFalse(value, true);
     }
 
-    public static boolean and(Object value, Object value1) {
-        return isTrue(value) && isTrue(value1);
+    public static boolean and(Object value, Object value1, Object... values) {
+
+        boolean result = isTrue(value) || isTrue(value1);
+
+        if (values != null) {
+            for (Object valuen : values) {
+                result = and(result, isTrue(valuen));
+            }
+        }
+
+        return result;
     }
 
-    public static boolean or(Object value, Object value1) {
-        return isTrue(value) || isTrue(value1);
+    public static boolean or(Object value, Object value1, Object... values) {
+
+        boolean result = isTrue(value) || isTrue(value1);
+
+        if (values != null) {
+            for (Object valuen : values) {
+                result = or(result, isTrue(valuen));
+            }
+        }
+
+        return result;
     }
 
     public static boolean not(Object value) {
         return !isTrue(value);
+    }
+
+
+    public static boolean eq(Object one, Object second) {
+
+        if (one instanceof String) {
+            one = trimToNull(one);
+        }
+
+        if (second instanceof String) {
+            second = trimToNull(second);
+        }
+
+        if (one == second) {
+            return true;
+        }
+
+        if (one == null || second == null) {
+            return false;
+        }
+
+        return one.equals(second);
     }
 
 }

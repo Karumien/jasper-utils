@@ -7,6 +7,7 @@
 package cz.i24.util.jasper;
 
 import java.io.File;
+import java.util.Arrays;
 
 import net.sf.jasperreports.engine.util.FileResolver;
 
@@ -36,6 +37,11 @@ public class ClassPathFileResolver implements FileResolver {
 
     public String[] getClassPath() {
         return this.classPath;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + (this.classPath == null ? "" : " " + Arrays.toString(this.classPath));
     }
 
 }
