@@ -57,12 +57,18 @@ public class RUTest {
     public void testJson() throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
+
         JsonNode data = mapper.readTree("{\"value\": 1000.45 }");
-
         Object val = RU.json(data, "value");
-
         Assert.assertNotNull(val);
 
+        data = mapper.readTree("{\"value\": null }");
+        val = RU.json(data, "value");
+        Assert.assertNull(val);
+
+        data = mapper.readTree("{\"value\": null }");
+        val = RU.json(data, "value", "xxx");
+        Assert.assertNotNull(val);
     }
 
 
@@ -95,7 +101,9 @@ public class RUTest {
         Assert.assertEquals(false, RU.isTrue(Boolean.FALSE));
 
         Assert.assertEquals(false, RU.isTrue(null));
+        Assert.assertEquals(false, RU.isTrue(null, false));
         Assert.assertEquals(true, RU.isTrue(null, true));
+        Assert.assertEquals(true, RU.isFalse(null, true));
         Assert.assertEquals(false, RU.isFalse(null, false));
 
         Assert.assertEquals(true, RU.and(RU.isTrue("true"), RU.isTrue(Boolean.TRUE)));

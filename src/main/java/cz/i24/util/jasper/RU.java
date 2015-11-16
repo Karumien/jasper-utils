@@ -166,11 +166,14 @@ public final class RU {
         return df.format(value);
     }
 
-
     public static Object json(Object data, String hierarchy) {
+        return json(data, hierarchy, null);
+    }
+
+    public static Object json(Object data, String hierarchy, Object defaultValue) {
 
         if (!(data instanceof JsonNode) || isBlank(hierarchy)) {
-            return null;
+            return defaultValue;
         }
 
         try {
@@ -199,7 +202,7 @@ public final class RU {
                 }
 
                 if (actual.isNull()) {
-                    return null;
+                    return defaultValue;
                 }
 
                 if (actual.isBigDecimal() || actual.isDouble() || actual.isFloatingPointNumber() || actual.isNumber()) {
@@ -217,7 +220,7 @@ public final class RU {
             return hierarchy;
         }
 
-        return null;
+        return defaultValue;
     }
 
     /* NUMBER FORMAT ALIASES */
@@ -1166,7 +1169,7 @@ public final class RU {
 
     public static boolean and(Object value, Object value1, Object... values) {
 
-        boolean result = isTrue(value) || isTrue(value1);
+        boolean result = isTrue(value) && isTrue(value1);
 
         if (values != null) {
             for (Object valuen : values) {
