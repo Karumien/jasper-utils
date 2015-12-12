@@ -1264,10 +1264,14 @@ public final class RU {
 
             Object value = obj;
             if (method != null) {
-                try {
-                    value = PropertyUtils.getProperty(value, method);
-                } catch (Exception e) {
-                    value = null;
+                if (obj instanceof JsonNode) {
+                    value = json(obj, method);
+                } else {
+                    try {
+                        value = PropertyUtils.getProperty(value, method);
+                    } catch (Exception e) {
+                        value = null;
+                    }
                 }
             }
 
