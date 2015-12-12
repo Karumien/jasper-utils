@@ -17,12 +17,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
 import net.sf.jasperreports.engine.util.FileResolver;
+
+import org.apache.commons.beanutils.PropertyUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
@@ -1217,6 +1220,55 @@ public final class RU {
         }
 
         return one.equals(second);
+    }
+
+    @SuppressWarnings({ "rawtypes" })
+    public static Collection in(Collection objects, Collection filterValues) {
+        return in(objects, null, filterValues, false);
+    }
+
+    @SuppressWarnings({ "rawtypes" })
+    public static Collection in(Collection objects, String method, Collection filterValues) {
+        return in(objects, method, filterValues, false);
+    }
+
+    @SuppressWarnings({ "rawtypes" })
+    public static Collection nin(Collection objects, Collection filterValues) {
+        return in(objects, null, filterValues, true);
+    }
+
+    @SuppressWarnings({ "rawtypes" })
+    public static Collection nin(Collection objects, String method, Collection filterValues) {
+        return in(objects, method, filterValues, true);
+    }
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    protected static Collection in(Collection objects, String method, Collection filterValues, boolean negation) {
+
+        List filtered = new ArrayList();
+        if (objects == null || objects.isEmpty() || filterValues == null || filterValues.isEmpty()) {
+            return negation ? objects : filtered;
+        }
+
+        for (Object obj : objects) {
+
+            Object value = obj;
+            if (method != null) {
+                try {
+                    value = PropertyUtils.getProperty(value, method);
+                } catch (Exception e) {
+                    value = null;
+                }
+            }
+
+            if (value != null
+                    && (!negation && filterValues.contains(value) || negation && !filterValues.contains(value))) {
+                filtered.add(obj);
+            }
+
+        }
+
+        return filtered;
     }
 
 }

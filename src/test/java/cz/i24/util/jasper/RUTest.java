@@ -8,7 +8,10 @@ package cz.i24.util.jasper;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -151,4 +154,45 @@ public class RUTest {
         Assert.assertEquals(false, RU.and(RU.isTrue("true"), RU.isTrue(null), false));
     }
 
+    @Test
+    public void testIn() {
+
+        Assert.assertEquals(RU.in(Arrays.asList("CSO4", "CS", "XA", "XB"), Arrays.asList("X", "XS")).size(), 0);
+        Assert.assertEquals(RU.in(Arrays.asList("CSO4", "CS", "XA", "XB"), Arrays.asList("CS", "XA")).size(), 2);
+        Assert.assertEquals(RU.in(Arrays.asList("CSO4", "CS", "XA", "XB"), Arrays.asList("CS", "XA", "XM")).size(), 2);
+
+        Assert.assertEquals(
+                RU.in(Arrays.asList(new RiderVO("CSO4"), new RiderVO("CS"), new RiderVO("XA"), new RiderVO("XB")),
+                        "product", Arrays.asList("Z", "X")).size(), 0);
+        Assert.assertEquals(
+                RU.in(Arrays.asList(new RiderVO("CSO4"), new RiderVO("CS"), new RiderVO("XA"), new RiderVO("XB")),
+                        "product", Arrays.asList("CS", "XA")).size(), 2);
+        Assert.assertEquals(
+                RU.in(Arrays.asList(new RiderVO("CSO4"), new RiderVO("CS"), new RiderVO("XA"), new RiderVO("XB")),
+                        "product", Arrays.asList("CS", "XA", "XM")).size(), 2);
+
+        Assert.assertEquals(RU.nin(Arrays.asList("CSO4", "CS", "XA", "XB"), Arrays.asList("X", "XS")).size(), 4);
+        Assert.assertEquals(RU.nin(Arrays.asList("CSO4", "CS", "XA", "XB"), Arrays.asList("CS")).size(), 3);
+        Assert.assertEquals(RU.nin(Arrays.asList("CSO4", "CS", "XA", "XB"), Arrays.asList("CS", "XA", "XM")).size(), 2);
+
+
+        Assert.assertEquals(
+                RU.nin(Arrays.asList(new RiderVO("CSO4"), new RiderVO("CS"), new RiderVO("XA"), new RiderVO("XB")),
+                        "product", Arrays.asList("Z", "X")).size(), 4);
+        Assert.assertEquals(
+                RU.nin(Arrays.asList(new RiderVO("CSO4"), new RiderVO("CS"), new RiderVO("XA"), new RiderVO("XB")),
+                        "product", Arrays.asList("CS")).size(), 3);
+        Assert.assertEquals(
+                RU.nin(Arrays.asList(new RiderVO("CSO4"), new RiderVO("CS"), new RiderVO("XA"), new RiderVO("XB")),
+                        "product", Arrays.asList("CS", "XA", "XM")).size(), 2);
+
+    }
+
+    @SuppressWarnings("rawtypes")
+    public static List list(Object... data) {
+        if (data == null) {
+            return new ArrayList();
+        }
+        return Arrays.asList(data);
+    }
 }
