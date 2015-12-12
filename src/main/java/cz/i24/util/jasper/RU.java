@@ -16,6 +16,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -1283,6 +1284,15 @@ public final class RU {
         }
 
         return filtered;
+    }
+
+
+    @SuppressWarnings("rawtypes")
+    public static List list(Object... data) {
+        if (data == null) {
+            return new ArrayList();
+        }
+        return Arrays.asList(data);
     }
 
 }

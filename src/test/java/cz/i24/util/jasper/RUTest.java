@@ -8,10 +8,8 @@ package cz.i24.util.jasper;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -188,11 +186,4 @@ public class RUTest {
 
     }
 
-    @SuppressWarnings("rawtypes")
-    public static List list(Object... data) {
-        if (data == null) {
-            return new ArrayList();
-        }
-        return Arrays.asList(data);
-    }
 }
