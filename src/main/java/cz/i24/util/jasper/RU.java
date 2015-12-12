@@ -523,15 +523,25 @@ public final class RU {
         return hoursStr + ":" + minutesStr + ":" + secondsStr;
     }
 
-
+    @Deprecated
     public static boolean isNull(Object o) {
         return o == null;
     }
 
+    public static boolean isEmpty(Object o) {
+        return isBlank(o);
+    }
+
+    @SuppressWarnings("rawtypes")
     public static boolean isBlank(Object o) {
         if (o == null) {
             return true;
         }
+
+        if (o instanceof Collection) {
+            return ((Collection) o).isEmpty();
+        }
+
         return o.toString().length() == 0;
     }
 
